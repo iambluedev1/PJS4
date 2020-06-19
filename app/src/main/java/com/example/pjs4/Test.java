@@ -14,6 +14,7 @@ import model.FirestoreCallback;
 public class Test extends AppCompatActivity {
 
     private ImageView img_view;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +22,8 @@ public class Test extends AppCompatActivity {
 
         this.img_view = findViewById(R.id.img_view);
 
-        FireBase fb = new FireBase();
-        fb.getImage("apples-1841132_1920.jpg",new FirestoreCallback<Bitmap>(){
+        FireBase fb = FireBase.getInstance();
+        fb.getImage("apples-1841132_1920.jpg", new FirestoreCallback<Bitmap>() {
 
             @Override
             public void onCallback(Bitmap b) {

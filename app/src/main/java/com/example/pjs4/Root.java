@@ -1,11 +1,6 @@
 package com.example.pjs4;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -13,12 +8,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.HashMap;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import model.Challenge;
 import model.FireBase;
-import model.FirestoreCallback;
-import model.MapWrapper;
 
 public class Root extends AppCompatActivity {
 
@@ -28,8 +20,7 @@ public class Root extends AppCompatActivity {
         setContentView(R.layout.activity_root);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        FireBase fb = new FireBase();
-        fb.getAllChallenges();
+        FireBase fb = FireBase.getInstance();
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

@@ -3,7 +3,6 @@ package com.example.pjs4;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,13 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-
 import model.FireBase;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText etEmail,etPassword,etLogin,etConPass;
+    EditText etEmail, etPassword, etLogin, etConPass;
     Button btnRegister;
-    String email,login,pass,conPass;
+    String email, login, pass, conPass;
 
     private FirebaseAuth mAuth;
     private FireBase db;
@@ -35,7 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        db = new FireBase();
+        db = FireBase.getInstance();
 
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -78,53 +76,49 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void initialize(){
-        email= etEmail.getText().toString();
+    public void initialize() {
+        email = etEmail.getText().toString();
         login = etLogin.getText().toString();
         pass = etPassword.getText().toString();
-        conPass=etConPass.getText().toString();
+        conPass = etConPass.getText().toString();
     }
 
-    public boolean validate(){
+    public boolean validate() {
         boolean valid = true;
-        if(login.isEmpty()){
+        if (login.isEmpty()) {
             etLogin.setError("Login manquant");
             etLogin.requestFocus();
-            valid =false;
-        }
-
-        else if(pass.length()<6){
+            valid = false;
+        } else if (pass.length() < 6) {
             etPassword.setError("Le mot de passe doit contenir au moins 6 caractères");
             etPassword.requestFocus();
-            valid =false;
-        }
-        else if(conPass.isEmpty()) {
+            valid = false;
+        } else if (conPass.isEmpty()) {
             etConPass.setError("Confirmez votre mot de passe");
             etConPass.requestFocus();
-            valid =false;
-        }
-        else if (!pass.equals(conPass)){
+            valid = false;
+        } else if (!pass.equals(conPass)) {
             etConPass.setError("Les mots de passe ne correspondent pas ");
             etConPass.requestFocus();
-            valid =false;
+            valid = false;
         }
-        else if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        /*else if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             etEmail.setError("Email manquant/incorrect");
             etEmail.requestFocus();
             valid =false;
-        }
+        }*/
 
         return valid;
     }
 
-    public void openAccueil(){
+    public void openAccueil() {
         Intent in = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(in);
     }
 
-    public void register (){
+    public void register() {
         initialize();
-        if(validate()){
+        if (validate()) {
             onSignUpSuccess();
         }
     }
@@ -145,7 +139,8 @@ public class SignUpActivity extends AppCompatActivity {
                             authentication();
 
                         } else {
-                            Toast.makeText(SignUpActivity.this,"L'adresse mail que vous tentez d'utiliser est déjà attribuée à un compte", Toast.LENGTH_SHORT).show();
+                            task.getException().printStackTrace();
+                            Toast.makeText(SignUpActivity.this, "L'adresse mail que vous tentez d'utiliser est déjà attribuée à un compte", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

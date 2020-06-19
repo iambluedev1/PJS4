@@ -1,9 +1,5 @@
 package com.example.pjs4;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,11 +37,11 @@ public class ShowChallenge extends AppCompatActivity {
         setContentView(R.layout.activity_show_challenge);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
-        tv_title=findViewById(R.id.tv_title);
-        tv_description=findViewById(R.id.tv_description);
-        tv_level=findViewById(R.id.tv_level);
-        tv_type=findViewById(R.id.tv_type);
-        tv_verif=findViewById(R.id.tv_verif);
+        tv_title = findViewById(R.id.tv_title);
+        tv_description = findViewById(R.id.tv_description);
+        tv_level = findViewById(R.id.tv_level);
+        tv_type = findViewById(R.id.tv_type);
+        tv_verif = findViewById(R.id.tv_verif);
         btn_upload = findViewById(R.id.btn_poster);
         btn_galery = findViewById(R.id.btn_galery);
         img_view = findViewById(R.id.img_view);
@@ -117,7 +117,7 @@ public class ShowChallenge extends AppCompatActivity {
         }
     }
 
-    private void initChallenge(){
+    private void initChallenge() {
         Bundle b = getIntent().getExtras();
         tv_title.setText(b.getString("tv_challengeName"));
         tv_description.setText(b.getString("tv_challengeDesc"));
@@ -125,8 +125,7 @@ public class ShowChallenge extends AppCompatActivity {
         tv_level.setText(b.getString("tv_challengeLevel"));
         String verif = b.getString("verif");
 
-        if(verif.equals("true")){
-
+        if (verif.equals("true")) {
             tv_verif.setText("Challenge déjà terminé BRAVO !");
 
             btn_galery.setVisibility(View.GONE);

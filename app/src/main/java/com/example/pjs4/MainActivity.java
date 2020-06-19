@@ -9,12 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -34,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private FireBase Fb;
 
     public MainActivity() {
-
-
     }
 
     //rajouter la view
@@ -45,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        Fb = new FireBase();
+        Fb = FireBase.getInstance();
 
         btn_go = (Button) findViewById(R.id.button_goAccueil);
         btn_register = findViewById(R.id.button_register);
@@ -58,24 +52,14 @@ public class MainActivity extends AppCompatActivity {
         ed1 = findViewById(R.id.input_login);
         ed2 = findViewById(R.id.input_pwd);
 
-        btn_go.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                intialize();
-                authentication();
-            }
+        btn_go.setOnClickListener(v -> {
+            intialize();
+            authentication();
         });
 
-
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
-            }
-
-        });
-
+        btn_register.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class))
+        );
     }
 
     private void intialize() {
@@ -84,26 +68,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void authentication() {
-
         mAuth.signInWithEmailAndPassword(login, pwd)
-                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success
-                            Log.d("Authentication", "Success");
-                            openAccueil();
+                .addOnCompleteListener(MainActivity.this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success
+                        Log.d("Authentication", "Success");
+                        openAccueil();
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.d("Authentication", "Failed");
-                            Toast.makeText(MainActivity.this, "Authentification échouée",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.d("Authentication", "Failed");
+                        Toast.makeText(MainActivity.this, "Authentification échouée",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
     }
 
     private void openAccueil() {
@@ -111,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void gogoooo(View view){
+    public void gogoooo(View view) {
         Intent in = new Intent(MainActivity.this, Root.class);
         startActivity(in);
     }
@@ -120,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null){
+        if (currentUser != null) {
             openAccueil();
         }
     }

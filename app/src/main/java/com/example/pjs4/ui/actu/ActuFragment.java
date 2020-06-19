@@ -1,13 +1,11 @@
 package com.example.pjs4.ui.actu;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,13 +14,10 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import com.example.pjs4.R;
 
 import com.example.pjs4.R;
 import com.example.pjs4.ShowChallenge;
-import com.example.pjs4.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import model.Challenge;
@@ -53,11 +48,10 @@ public class ActuFragment extends Fragment {
      */
 
 
-
     /**
      * Challenges juste pour tester...
      */
-    public void initTestChallenge(){
+    public void initTestChallenge() {
 
 
         ArrayList<String> actu1 = new ArrayList<>();
@@ -94,7 +88,7 @@ public class ActuFragment extends Fragment {
         l.add(actu3);
     }
 
-    private void setOnClickShow(final TextView btn, final Challenge c){
+    private void setOnClickShow(final TextView btn, final Challenge c) {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,9 +101,8 @@ public class ActuFragment extends Fragment {
 
     /**
      * Reste à modifier
-     *
      */
-    public void SendChallenge(Challenge c){
+    public void SendChallenge(Challenge c) {
 
         Intent i = new Intent(getActivity(), ShowChallenge.class);
         Bundle bundle = new Bundle();
@@ -125,9 +118,8 @@ public class ActuFragment extends Fragment {
 
     /**
      * à modif aussi
-     *
      */
-    public void showChallengeActu(View v){
+    public void showChallengeActu(View v) {
 
         //à la place il y aura :
         /**
@@ -137,7 +129,7 @@ public class ActuFragment extends Fragment {
 
         initTestChallenge();
 
-        LinearLayout lay_parent = v.findViewById(R.id.lay_parentDone) ;
+        LinearLayout lay_parent = v.findViewById(R.id.lay_parentDone);
 
         /*for (Challenge c : l ){
             LinearLayout lay_child = new LinearLayout(v.getContext());
